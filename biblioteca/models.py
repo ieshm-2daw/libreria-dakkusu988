@@ -15,9 +15,23 @@ class Biblioteca(models.Model):
 """
 
 class Usuario(AbstractUser):
-    dni = models.CharField(max_length=9)
+    DNI = models.CharField(max_length=9)
     direccion = models.CharField(max_length=50)
     telefono = models.IntegerField(validators = [MinValueValidator(0)])
 
     def __str__(self):
         return self.dni
+    
+class Libro(models.Model):
+    titulo = models.CharField(max_length=100)
+    autor = models.CharField(max_length=100)
+    editorial = models.CharField(max_length=9)
+    fecha_publicacion = models.CharField(max_length=50)
+    genero = models.IntegerField(validators = [MinValueValidator(0)])
+    ISBN = models.IntegerField(validators = [MinValueValidator(0)])
+    resumen = models.IntegerField(validators = [MinValueValidator(0)])
+    disponibilidad = models.IntegerField(validators = [MinValueValidator(0)]) # (posibles valores: disponible, prestado, en proceso de préstamo)
+    portada = models.ImageField(validators = [MinValueValidator(0)])
+
+    def __str__(self):
+        return self.titulo
