@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 class Usuario(AbstractUser):
-    DNI = models.CharField(max_length=9)
+    DNI = models.CharField(max_length=9, unique=True)
     direccion = models.CharField(max_length=100)
     telefono = models.CharField(max_length=15)
 
@@ -48,14 +48,14 @@ class Libro(models.Model):
 class Prestamo(models.Model):
     libro_prestado = models.ForeignKey(Libro, on_delete=models.CASCADE)
     fecha_prestamo = models.DateField()
-    fecha_devolucion = models.DateField()
+    fecha_devolucion = models.DateField(null=True, blank=True)
     usuario_prestador = models.ForeignKey(Usuario, on_delete=models.CASCADE)
 
     ESTADO_VALORES = (
     ('prestado', 'Prestado'),
     ('devuelto', 'Devuelto'),)
 
-    estado_prestamo = models.CharField(max_length=50, valor=ESTADO_VALORES)
+    estado_prestamo = models.CharField(max_length=50, valor=ESTADO_VALORES, default="prestado")
 
     def __str__(self):
         return f'{self.libro_prestado.titulo} - {self.usuario_prestador.username}'
