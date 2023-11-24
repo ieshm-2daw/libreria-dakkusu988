@@ -26,12 +26,6 @@ class Autor(models.Model):
         return self.nombre
 
 class Libro(models.Model):
-    DISPONIBILIDAD_VALORES = (
-        ('disponible', 'Disponible'),
-        ('prestado', 'Prestado'),
-        ('proceso_prestamo', 'En proceso de préstamo'),
-    )
-
     titulo = models.CharField(max_length=100)
     autores = models.ManyToManyField(Autor)
     editorial = models.ForeignKey(Editorial, on_delete=models.CASCADE)
@@ -39,6 +33,12 @@ class Libro(models.Model):
     genero = models.CharField(max_length=50)
     ISBN = models.CharField(max_length=13)
     resumen = models.TextField(upload_to='portadas/', null=True, blank=True)
+
+    DISPONIBILIDAD_VALORES = (
+        ('disponible', 'Disponible'),
+        ('prestado', 'Prestado'),
+        ('proceso_prestamo', 'En proceso de préstamo'),)
+
     disponibilidad = models.CharField(max_length=50, valor=DISPONIBILIDAD_VALORES)
     portada = models.ImageField()  # Campo para cargar la portada del libro
 
@@ -46,15 +46,15 @@ class Libro(models.Model):
         return self.titulo
 
 class Prestamo(models.Model):
-    ESTADO_VALORES = (
-        ('prestado', 'Prestado'),
-        ('devuelto', 'Devuelto'),
-    )
-
     libro_prestado = models.ForeignKey(Libro, on_delete=models.CASCADE)
     fecha_prestamo = models.DateField()
     fecha_devolucion = models.DateField()
     usuario_prestador = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+
+    ESTADO_VALORES = (
+    ('prestado', 'Prestado'),
+    ('devuelto', 'Devuelto'),)
+
     estado_prestamo = models.CharField(max_length=50, valor=ESTADO_VALORES)
 
     def __str__(self):
