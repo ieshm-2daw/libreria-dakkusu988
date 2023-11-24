@@ -1,5 +1,4 @@
 from django.db import models
-from django.core.validators import MinValueValidator
 from django.contrib.auth.models import AbstractUser
 
 class Usuario(AbstractUser):
@@ -13,7 +12,7 @@ class Usuario(AbstractUser):
 class Editorial(models.Model):
     nombre = models.CharField(max_length=100)
     direccion = models.CharField(max_length=100)
-    sitio_web = models.URLField()  # Cambiado a un campo URL para el sitio web
+    sitio_web = models.URLField()  # Campo URL para el sitio web
 
     def __str__(self):
         return self.nombre
@@ -21,7 +20,7 @@ class Editorial(models.Model):
 class Autor(models.Model):
     nombre = models.CharField(max_length=100)
     biografia = models.TextField(max_length=100)
-    foto = models.ImageField(upload_to='')  # Campo para cargar la foto de perfil
+    foto = models.ImageField(upload_to='autores/', null=True, blank=True)  # Campo para cargar la foto de perfil
 
     def __str__(self):
         return self.nombre
@@ -39,8 +38,8 @@ class Libro(models.Model):
     fecha_publicacion = models.DateField()
     genero = models.CharField(max_length=50)
     ISBN = models.CharField(max_length=13)
-    resumen = models.TextField(upload_to='')
-    disponibilidad = models.CharField(max_length=20, valor=DISPONIBILIDAD_VALORES)
+    resumen = models.TextField(upload_to='portadas/', null=True, blank=True)
+    disponibilidad = models.CharField(max_length=50, valor=DISPONIBILIDAD_VALORES)
     portada = models.ImageField()  # Campo para cargar la portada del libro
 
     def __str__(self):
@@ -56,7 +55,7 @@ class Prestamo(models.Model):
     fecha_prestamo = models.DateField()
     fecha_devolucion = models.DateField()
     usuario_prestador = models.ForeignKey(Usuario, on_delete=models.CASCADE)
-    estado_prestamo = models.CharField(max_length=20, valor=ESTADO_VALORES)
+    estado_prestamo = models.CharField(max_length=50, valor=ESTADO_VALORES)
 
     def __str__(self):
         return f'{self.libro_prestado.titulo} - {self.usuario_prestador.username}'
