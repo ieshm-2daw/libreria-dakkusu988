@@ -2,36 +2,61 @@ from django.db import models
 from django.core.validators import MinValueValidator
 from django.contrib.auth.models import AbstractUser
 
-""" Referencia por si me hace falta algo
-class Biblioteca(models.Model):
-    title = models.CharField(max_length=100)
-    author = models.CharField(max_length=100)
-    rating = models.IntegerField(validators = [MinValueValidator(0), MaxValueValidator(5)])
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.title
-"""
-
 class Usuario(AbstractUser):
     DNI = models.CharField(max_length=9)
-    direccion = models.CharField(max_length=50)
-    telefono = models.IntegerField(validators = [MinValueValidator(0)])
+    direccion = models.CharField(max_length=100)
+    telefono = models.CharField(max_length=15)
 
     def __str__(self):
-        return self.dni
-    
+        return self.DNI
+
+class Editorial(models.Model):
+    nombre = models.CharField(max_length=100)
+    direccion = models.CharField(max_length=100)
+    sitio_web = models.URLField()  # Cambiado a un campo URL para el sitio web
+
+    def __str__(self):
+        return self.nombre
+
+class Autor(models.Model):
+    nombre = models.CharField(max_length=100)
+    biografia = models.TextField(max_length=100)
+    foto = models.ImageField(upload_to='')  # Campo para cargar la foto de perfil
+
+    def __str__(self):
+        return self.nombre
+
 class Libro(models.Model):
+    DISPONIBILIDAD_VALORES = (
+        ('disponible', 'Disponible'),
+        ('prestado', 'Prestado'),
+        ('proceso_prestamo', 'En proceso de préstamo'),
+    )
+
     titulo = models.CharField(max_length=100)
-    autor = models.CharField(max_length=100)
-    editorial = models.CharField(max_length=9)
-    fecha_publicacion = models.CharField(max_length=50)
-    genero = models.IntegerField(validators = [MinValueValidator(0)])
-    ISBN = models.IntegerField(validators = [MinValueValidator(0)])
-    resumen = models.IntegerField(validators = [MinValueValidator(0)])
-    disponibilidad = models.IntegerField(validators = [MinValueValidator(0)]) # (posibles valores: disponible, prestado, en proceso de préstamo)
-    portada = models.ImageField(validators = [MinValueValidator(0)])
+    autores = models.ManyToManyField(Autor)
+    editorial = models.ForeignKey(Editorial, on_delete=models.CASCADE)
+    fecha_publicacion = models.DateField()
+    genero = models.CharField(max_length=50)
+    ISBN = models.CharField(max_length=13)
+    resumen = models.TextField(upload_to='')
+    disponibilidad = models.CharField(max_length=20, valor=DISPONIBILIDAD_VALORES)
+    portada = models.ImageField()  # Campo para cargar la portada del libro
 
     def __str__(self):
         return self.titulo
+
+class Prestamo(models.Model):
+    ESTADO_VALORES = (
+        ('prestado', 'Prestado'),
+        ('devuelto', 'Devuelto'),
+    )
+
+    libro_prestado = models.ForeignKey(Libro, on_delete=models.CASCADE)
+    fecha_prestamo = models.DateField()
+    fecha_devolucion = models.DateField()
+    usuario_prestador = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    estado_prestamo = models.CharField(max_length=20, valor=ESTADO_VALORES)
+
+    def __str__(self):
+        return f'{self.libro_prestado.titulo} - {self.usuario_prestador.username}'
