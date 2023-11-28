@@ -11,6 +11,14 @@
     <body style="padding: 20px">
 
         <h1>Listado Libros</h1>
+
+        {% for libros in object_list %}
+            <article>    
+
+                <p> {{ libros.titulo }} </p>
+                
+            </article>
+        {% endfor %}
         
     </body>    
 </html>
