@@ -1,3 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
+from django.views.generic import ListView
+from .models import Libro
 
-# Create your views here.
+class listadoLibros(ListView):
+    model = Libro
+    template_name = 'biblioteca/listadoLibros.html'
