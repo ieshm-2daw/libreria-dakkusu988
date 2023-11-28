@@ -32,7 +32,7 @@ class Libro(models.Model):
     fecha_publicacion = models.DateField()
     genero = models.CharField(max_length=50)
     ISBN = models.CharField(max_length=13)
-    #resumen = models.TextField(upload_to='portadas/', null=True, blank=True)
+    #resumen = models.ImageField(upload_to='portadas/', null=True, blank=True)
 
     DISPONIBILIDAD_VALORES = (
         ('disponible', 'Disponible'),
