@@ -13,7 +13,7 @@
 
         <a href="{% url 'listadoLibros' %}" role="button">Volver al Listado</a> 
         
-        <form action= "{% url 'añadirLibros' %}" method="post">
+        <form action= "{% url 'anadirLibros' %}" method="post">
 
             {% csrf_token %}
             {{ form.as_p }}

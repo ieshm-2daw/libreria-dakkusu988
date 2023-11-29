@@ -7,10 +7,10 @@ class listadoLibros(ListView):
     model = Libro
     template_name = 'biblioteca/listadoLibros.html'
 
-class añadirLibros(CreateView):
+class anadirLibros(CreateView):
     model = Libro
-    fields = ['titulo', 'autores', 'editorial', 'fecha_publicacion', 'genero', 'ISBN', 'resumen', 'disponibilidad', 'portada']
-    template_name = "biblioteca/añadirLibros.html"
+    fields = ['titulo', 'autores', 'editorial', 'fecha_publicacion', 'genero', 'ISBN', 'disponibilidad', 'portada']
+    template_name = "biblioteca/anadirLibros.html"
 
     # Puedes redirigir a una vista específica usando reverse
     def get_success_url(self):
@@ -22,7 +22,7 @@ class detallesLibros(DetailView):
 
 class editarLibros(UpdateView):
     model = Libro
-    fields = ['titulo', 'autores', 'editorial', 'fecha_publicacion', 'genero', 'ISBN', 'resumen', 'disponibilidad', 'portada']
+    fields = ['titulo', 'autores', 'editorial', 'fecha_publicacion', 'genero', 'ISBN', 'disponibilidad', 'portada']
     template_name = "biblioteca/editarLibros.html"
 
     def get_success_url(self):
