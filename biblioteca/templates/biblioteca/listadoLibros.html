@@ -1,24 +1,27 @@
 <!DOCTYPE html>
-
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Listado Libros</title>
+        <title>Listado</title>
         <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.classless.min.css">
     </head>
 
-    <body style="padding: 20px">
+    <body style="padding: 20px;">
 
-        <h1>Listado Libros</h1>
 
-        {% for libros in object_list %}
+        <h1>Listado de Libros</h1>
+
+        <a role="button" href="{% url 'añadirLibros' %}"> Añadir un Libro Nuevo </a>
+
+        {% for book in object_list %}
             <article>    
 
-                <p> {{ libros.titulo }} </p>
+                <p> {{ book.titulo }} </p>
+                <a href="{% url 'detallesLibros' pk=book.pk %}" role="button">Detalles</a>
                 
             </article>
         {% endfor %}
-        
-    </body>    
+    
+    </body>
 </html>

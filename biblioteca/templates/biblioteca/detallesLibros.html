@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Detalles</title>
+        <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.classless.min.css">
+    </head>
+
+    <body style="padding: 20px;">
+
+        <h2>Detalles del Libro</h2>
+        
+        <article>
+            <p><strong>Titulo:</strong> {{ object.titulo }}</p>
+            <p><strong>Autores:</strong> {{ object.autor }}</p>
+            <p><strong>Editorial:</strong> {{ object.editorial }}</p>
+            <p><strong>Fecha de Publicacion:</strong> {{ object.fecha_publicacion }}</p>
+            <p><strong>Genero:</strong> {{ object.genero }}</p>
+            <p><strong>ISBN:</strong> {{ object.ISBN }}</p>
+            <p><strong>Resumen:</strong> {{ object.resumen }}</p>
+            <p><strong>Disponibilidad:</strong> {{ object.disponibilidad }}</p>
+            <p><strong>Portada:</strong> {{ object.portada }}</p>
+            <a href="{% url 'listadoLibros' %}" role="button">Volver al Listado</a>
+            <a href="{% url 'editarLibros' pk=object.pk %}" role="button">Editar</a>
+            <a href="{% url 'borrarLibros' pk=object.pk %}" role="button">Borrar</a>
+        </article>
+
+    </body> 
+</html>

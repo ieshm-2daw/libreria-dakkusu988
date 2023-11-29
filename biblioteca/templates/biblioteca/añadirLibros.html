@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Añadir</title>
+        <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.classless.min.css">
+    </head>
+
+    <body style="padding: 20px;">
+
+        <h1>Añadir un Libro Nuevo</h1>
+
+        <a href="{% url 'listadoLibros' %}" role="button">Volver al Listado</a> 
+        
+        <form action= "{% url 'añadirLibros' %}" method="post">
+
+            {% csrf_token %}
+            {{ form.as_p }}
+            
+            <input type="submit" value="Añadir">
+            
+        </form>
+
+    </body> 
+</html>
