@@ -19,7 +19,12 @@
             <p><strong>Genero:</strong> {{ object.genero }}</p>
             <p><strong>ISBN:</strong> {{ object.ISBN }}</p>
             <p><strong>Disponibilidad:</strong> {{ object.disponibilidad }}</p>
-            <p><strong>Portada:</strong> <img src="media/{{ object.portada }}" alt="Portada de {{ object.titulo }}"></p>
+
+            <p><strong>Portada:</strong> 
+                <p></p> <!-- Espacio de linea --> 
+                <img style="height: 400px" src="{{ object.portada.url }}" alt="Portada de {{ object.titulo }}">
+            </p>
+
             <a href="{% url 'listadoLibros' %}" role="button">Volver al Listado</a>
             <a href="{% url 'editarLibros' pk=object.pk %}" role="button">Editar</a>
             <a href="{% url 'borrarLibros' pk=object.pk %}" role="button">Borrar</a>
