@@ -19,7 +19,8 @@
 
                 <p> {{ book.titulo }} </p>
                 <a href="{% url 'detallesLibros' pk=book.pk %}" role="button">Detalles</a>
-                <p> <img src="{{ book.portada }}" alt="Portada de {{ book.titulo }}"> </p>
+                <p></p> <!-- Espacio de linea -->
+                <p> <img src="media/{{ book.portada }}" alt="Portada de {{ book.titulo }}"> </p>
                 
             </article>
         {% endfor %}
