@@ -11,7 +11,7 @@
 
         <h1>Editar Libro</h1>
 
-        <form action="{% url 'editarLibros' pk=object.pk %}" method="post">
+        <form action="{% url 'editarLibros' pk=object.pk %}" enctype="multipart/form-data" method="post">
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit">Guardar Libro Editado</button>

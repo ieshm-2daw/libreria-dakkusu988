@@ -20,7 +20,7 @@ class Editorial(models.Model):
 class Autor(models.Model):
     nombre = models.CharField(max_length=100)
     biografia = models.TextField(max_length=100)
-    #foto = models.ImageField(upload_to='autores/', null=True, blank=True)  # Campo para cargar la foto de perfil
+    foto = models.ImageField(upload_to='autores/', null=True, blank=True)  # Campo para cargar la foto de perfil
 
     def __str__(self):
         return self.nombre
@@ -32,7 +32,7 @@ class Libro(models.Model):
     fecha_publicacion = models.DateField()
     genero = models.CharField(max_length=50)
     ISBN = models.CharField(max_length=13)
-    #resumen = models.ImageField(upload_to='portadas/', null=True, blank=True)
+    resumen = models.ImageField(upload_to='portadas/', null=True, blank=True)
 
     DISPONIBILIDAD_VALORES = (
         ('disponible', 'Disponible'),
