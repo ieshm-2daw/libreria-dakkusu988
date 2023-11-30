@@ -3,6 +3,7 @@ from django.views.generic import ListView, CreateView, DetailView, UpdateView, D
 from .models import Libro
 from django.urls import reverse, reverse_lazy
 
+# 1. LIBROS
 class listadoLibros(ListView):
     model = Libro
     template_name = 'biblioteca/listadoLibros.html'
@@ -37,3 +38,5 @@ class borrarLibros(DeleteView):
     # Mensaje de éxito al borrar
     def get_success_message(self):
         return "El libro ha sido eliminado exitosamente"
+    
+#2. PRESTAMO
