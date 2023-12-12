@@ -40,3 +40,6 @@ class borrarLibros(DeleteView):
         return "El libro ha sido eliminado exitosamente"
     
 #2. PRESTAMO
+
+class prestarLibros():
+    model = Libro

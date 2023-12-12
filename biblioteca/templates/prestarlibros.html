@@ -3,22 +3,22 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Eliminar {{ object.title }}</title>
+        <title>Prestar {{ object.title }}</title>
         <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.classless.min.css">
     </head>
 
     <body style="padding: 20px;">
 
-        <h1>Eliminar {{ object.titulo }}</h1>
+        <h1>Prestar {{ object.titulo }}</h1>
 
         <form action="" method="post">
             
             {% csrf_token %}
             
-            <p>Estás seguro  de que quieres ELIMINAR este libro.</p>
+            <p>Estás seguro  de que quieres PRESTAR este libro.</p>
             <p>Esta acción NO TIENE vuelta atrás.</p>
 
-            <input type="submit" value="Borrar Libro">
+            <input type="submit" value="Prestar Libro">
             <a href="{% url 'listadoLibros' %}" role="button">Cancelar</a>
         
         </form>
