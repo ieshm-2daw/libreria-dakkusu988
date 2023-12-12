@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
-from .models import Libro
+from .models import Libro, Prestamo
 from django.urls import reverse, reverse_lazy
 
 # 1. LIBROS
@@ -41,5 +41,9 @@ class borrarLibros(DeleteView):
     
 #2. PRESTAMO
 
-class prestarLibros():
-    model = Libro
+def devolver_libro(request, pk):
+    libro_prestado = get_object_or_404(Libro, pk= pk, disponibilidad= "prestado")
+    prestamo = Prestamo.objects.filter(libro= libro_prestado, usuario= request.user, estado= "prestado").first()
+
+    if request.method == "POST":
+        prestamo.estado_prestamo.
