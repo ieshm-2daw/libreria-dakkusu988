@@ -41,9 +41,9 @@ class borrarLibros(DeleteView):
     
 #2. PRESTAMO
 
-def devolver_libro(request, pk):
-    libro_prestado = get_object_or_404(Libro, pk= pk, disponibilidad= "prestado")
-    prestamo = Prestamo.objects.filter(libro= libro_prestado, usuario= request.user, estado= "prestado").first()
+#def devolver_libro(request, pk):
+#    libro_prestado = get_object_or_404(Libro, pk= pk, disponibilidad= "prestado")
+#    prestamo = Prestamo.objects.filter(libro= libro_prestado, usuario= request.user, estado= "prestado").first()
 
-    if request.method == "POST":
-        prestamo.estado_prestamo.
+#    if request.method == "POST":
+#        prestamo.estado_prestamo.
