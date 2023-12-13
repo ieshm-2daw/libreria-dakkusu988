@@ -3,30 +3,22 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Listado Disponibles</title>
+        <title>Mis Libros</title>
         <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.classless.min.css">
     </head>
 
     <body style="padding: 20px;">
 
-        <h1>Listado Libros Disponibles</h1>
-
+        <h1>Listado Mis Libros</h1>
+        
         <a role="button" href="{% url 'anadirLibros' %}"> Añadir un Libro Nuevo </a>
         <a href="{% url 'listadoLibros' %}" role="button">Listado de Todos los libros</a>
         <a href="{% url 'listadoDisponibles' %}" role="button">Libros Disponibles</a>
         <a href="{% url 'misLibros' %}" role="button">Mis Libros</a>
         <p></p> <!-- Espacio de linea -->
         
-        {% for book in object_list %}
-            <article>    
-
-                <p> {{ book.titulo }} </p>
-                <a href="{% url 'detallesLibros' pk=book.pk %}" role="button">Detalles</a>
-                <p></p> <!-- Espacio de linea -->
-                <p> <img style="height: 400px" src="{{ book.portada.url }}" alt="Portada de {{ book.titulo }}"> </p>
-                
-            </article>
-        {% endfor %}
-        
+        <h2>Libros Prestados</h2>
+        <h2>Libros Devueltos</h2>
+    
     </body>
 </html>

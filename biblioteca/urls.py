@@ -1,7 +1,7 @@
 # Archivo urls.py de biblioteca
 
 from django.urls import path
-from .views import listadoLibros, anadirLibros, detallesLibros, editarLibros, borrarLibros, listadoDisponibles
+from .views import listadoLibros, anadirLibros, detallesLibros, editarLibros, borrarLibros, listadoDisponibles, misLibros
 
 urlpatterns = [
     path('', listadoLibros.as_view(), name='listadoLibros'),
@@ -9,5 +9,6 @@ urlpatterns = [
     path('detalles/<int:pk>', detallesLibros.as_view(), name='detallesLibros'),
     path('editar/<int:pk>', editarLibros.as_view(), name='editarLibros'),
     path('borrar/<int:pk>', borrarLibros.as_view(), name='borrarLibros'),
-    path('disponibles', listadoDisponibles.as_view(), name='listadoDisponibles')
+    path('disponibles', listadoDisponibles.as_view(), name='listadoDisponibles'),
+    path('prestados', misLibros.as_view(), name='misLibros'),
 ]

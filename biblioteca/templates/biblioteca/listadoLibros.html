@@ -13,7 +13,9 @@
         <h1>Listado de Libros</h1>
 
         <a role="button" href="{% url 'anadirLibros' %}"> Añadir un Libro Nuevo </a>
+        <a href="{% url 'listadoLibros' %}" role="button">Listado de Todos los libros</a>
         <a href="{% url 'listadoDisponibles' %}" role="button">Libros Disponibles</a>
+        <a href="{% url 'misLibros' %}" role="button">Mis Libros</a>
 
         {% for book in object_list %}
             <article>    
