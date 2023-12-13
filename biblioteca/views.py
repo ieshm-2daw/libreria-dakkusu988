@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from .models import Libro, Prestamo
 from django.urls import reverse, reverse_lazy
+from typing import Any
 
 # 1. LIBROS (CRUD)
 class listadoLibros(ListView):
@@ -53,8 +54,18 @@ class listadoDisponibles(ListView):
 #3. MIS LIBROS (PRESTADOS Y DEVUELTOS [HISTORIAL])
 
 class misLibros(ListView):
-    model = Libro
+    model = Prestamo
     template_name = 'biblioteca/misLibros.html'
+
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+
+        context["prestamos_prestados"] = Prestamo.objects.filter(usuario_prestador=self.request.user, estado_prestamo="prestado")
+        context["prestamos_devueltos"] = Prestamo.objects.filter(usuario_prestador=self.request.user, estado_prestamo="devuelto")
+
+        return context
+
+#4. BOTON DEVOLVER LIBRO PRESTADO
 
 #def devolver_libro(request, pk):
 #    libro_prestado = get_object_or_404(Libro, pk= pk, disponibilidad= "prestado")
