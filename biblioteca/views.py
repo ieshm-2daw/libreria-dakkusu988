@@ -45,7 +45,7 @@ class listadoDisponibles(ListView):
     model = Libro
     template_name = 'biblioteca/listadoDisponibles.html'
 
-#3. MIS LIBROS (PRESTADOS Y DEVUELTOS)
+#3. MIS LIBROS (PRESTADOS Y DEVUELTOS [HISTORIAL])
 
 class misLibros(ListView):
     model = Libro
