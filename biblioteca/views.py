@@ -3,7 +3,7 @@ from django.views.generic import ListView, CreateView, DetailView, UpdateView, D
 from .models import Libro, Prestamo
 from django.urls import reverse, reverse_lazy
 
-# 1. LIBROS
+# 1. LIBROS (CRUD)
 class listadoLibros(ListView):
     model = Libro
     template_name = 'biblioteca/listadoLibros.html'
@@ -44,6 +44,11 @@ class borrarLibros(DeleteView):
 class listadoDisponibles(ListView):
     model = Libro
     template_name = 'biblioteca/listadoDisponibles.html'
+
+    def get_queryset(self):
+        queryset = Libro.objects.filter(disponibilidad='disponible')
+        return queryset
+
 
 #3. MIS LIBROS (PRESTADOS Y DEVUELTOS [HISTORIAL])
 
