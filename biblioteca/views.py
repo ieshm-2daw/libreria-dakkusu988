@@ -39,11 +39,20 @@ class borrarLibros(DeleteView):
     def get_success_message(self):
         return "El libro ha sido eliminado exitosamente"
     
-#2. PRESTAMO
+#2. LISTA DISPONIBLES
+
+class listadoDisponibles(ListView):
+    model = Libro
+    template_name = 'biblioteca/listadoDisponibles.html'
+
+#3. PRESTADOS
+
+#4. DEVUELTOS
 
 #def devolver_libro(request, pk):
 #    libro_prestado = get_object_or_404(Libro, pk= pk, disponibilidad= "prestado")
 #    prestamo = Prestamo.objects.filter(libro= libro_prestado, usuario= request.user, estado= "prestado").first()
-
+#
 #    if request.method == "POST":
-#        prestamo.estado_prestamo.
+#        prestamo.estado = "devuelto"
+#        prestamo.
