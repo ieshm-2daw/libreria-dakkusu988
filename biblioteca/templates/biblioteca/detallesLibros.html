@@ -13,7 +13,13 @@
         
         <article>
             <p><strong>Titulo:</strong> {{ object.titulo }}</p>
-            <p><strong>Autores:</strong> {{ object.autores }}</p>
+            <p>
+                <strong>Autor:</strong> <!-- Para mostrar correctamente el nombre del autor correspondiente --->
+                {% for autor in object.autores.all %}
+                        {{ autor.nombre }}
+                {% endfor %}
+            </p>
+
             <p><strong>Editorial:</strong> {{ object.editorial }}</p>
             <p><strong>Fecha de Publicacion:</strong> {{ object.fecha_publicacion }}</p>
             <p><strong>Genero:</strong> {{ object.genero }}</p>
