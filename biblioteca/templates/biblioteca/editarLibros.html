@@ -11,6 +11,9 @@
 
         <h1>Editar Libro</h1>
 
+        <a href="{% url 'listadoLibros' %}" role="button">Volver al Listado</a>
+        <p></p> <!-- Espacio de linea -->
+
         <form action="{% url 'editarLibros' pk=object.pk %}" enctype="multipart/form-data" method="post">
             {% csrf_token %}
             {{ form.as_p }}

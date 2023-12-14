@@ -16,12 +16,12 @@
         
         <!-- enctype="multipart/form-data" Hace que se guarden los datos de la imagen -->
         <form action= "{% url 'anadirLibros' %}" enctype="multipart/form-data" method="post">
+            <article>
+                {% csrf_token %}
+                {{ form.as_p }}
+            </article>
 
-            {% csrf_token %}
-            {{ form.as_p }}
-            
             <input type="submit" value="Añadir">
-            
         </form>
 
     </body> 

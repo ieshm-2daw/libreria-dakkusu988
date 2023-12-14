@@ -20,18 +20,33 @@
         <h2>Libros Prestados</h2>
 
         <article>
-            {% for prestamo in object_list %}
-                <p>{{ prestamo.libro_prestado.titulo }} - {{ prestamo.fecha_prestamo }}</p>
+            {% for prestamo in prestamos_prestados %}
+                <p> 
+                    <b>Titulo:</b> {{ prestamo.libro_prestado.titulo }} 
+                    
+                    <br> 
+
+                    <b>Fecha Préstamo:</b> {{ prestamo.fecha_prestamo }}
+                </p>
+
             {% empty %}
                 <p>No tienes libros prestados.</p>
             {% endfor %}
+
         </article>
 
         <h2>Libros Devueltos</h2>
         
         <article>
             {% for prestamo in prestamos_devueltos %}
-                <p>{{ prestamo.libro_prestado.titulo }} - {{ prestamo.fecha_devolucion }}</p>
+                <p> 
+                    <b>Titulo:</b> {{ prestamo.libro_prestado.titulo }} 
+                    
+                    <br> 
+
+                    <b>Fecha Devolución:</b> {{ prestamo.fecha_devolucion }}
+                </p>
+
             {% empty %}
                 <p>No tienes historial de libros devueltos.</p>
             {% endfor %}

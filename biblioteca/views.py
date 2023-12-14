@@ -62,12 +62,11 @@ class misLibros(ListView):
         context = super().get_context_data(**kwargs)
 
         context["prestamos_prestados"] = Prestamo.objects.all() #filter(usuario_prestador=self.request.user, estado_prestamo="prestado")
-        context["prestamos_devueltos"] = Prestamo.objects.filter(usuario_prestador=self.request.user, estado_prestamo="devuelto")
+        context["prestamos_devueltos"] = Prestamo.objects.all() #.filter(usuario_prestador=self.request.user, estado_prestamo="devuelto")
 
         return context
 
 #4. BOTON PRESTAR LIBRO
-    
 class prestarLibros(View):
     
     template_name = "biblioteca/prestarLibros.html"

@@ -11,15 +11,19 @@
 
         <h1>Eliminar {{ object.titulo }}</h1>
 
+        <a href="{% url 'listadoLibros' %}" role="button">Volver al Listado</a>
+        <p></p> <!-- Espacio de linea -->
+
         <form action="" method="post">
             
             {% csrf_token %}
             
-            <p>Estás seguro  de que quieres ELIMINAR este libro.</p>
-            <p>Esta acción NO TIENE vuelta atrás.</p>
-
+            <article>
+                <p>¿Estás seguro  de que quieres ELIMINAR este libro?</p>
+                <p><b>ESTA ACCIÓN NO TIENE VUELTA ATRÁS.</b></p>
+            </article>
+            
             <input type="submit" value="Borrar Libro">
-            <a href="{% url 'listadoLibros' %}" role="button">Cancelar</a>
         
         </form>
 
