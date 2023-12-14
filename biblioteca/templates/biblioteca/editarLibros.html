@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Editar</title>
+        <title>Editar Libro</title>
         <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.classless.min.css">
     </head>
 
@@ -15,8 +15,11 @@
         <p></p> <!-- Espacio de linea -->
 
         <form action="{% url 'editarLibros' pk=object.pk %}" enctype="multipart/form-data" method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
+            <article>
+                {% csrf_token %}
+                {{ form.as_p }}
+            </article>
+            
             <button type="submit">Guardar Libro Editado</button>
         </form>
 

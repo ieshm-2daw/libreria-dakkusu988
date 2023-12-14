@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Devolver Libro</title>
+        <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.classless.min.css">
+    </head>
+    <body style="padding: 20px;">
+        <h2>Confirmar Devolución</h2>
+
+        <article>
+            <p>¿Estás seguro de querer devolver este libro?</p>
+            <p><b>PUEDES VOLVER A PRESTARLO MÁS TARDE.</b></p>
+        </article>
+
+        <form action="{% url 'devolverLibros' pk=prestamo.pk %}" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Confirmar Devolución">
+        </form>
+    </body>
+</html>

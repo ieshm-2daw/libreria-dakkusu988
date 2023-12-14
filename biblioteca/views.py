@@ -68,8 +68,6 @@ class misLibros(ListView):
         return context
 
 #4. BOTON PRESTAR LIBRO
-# En tu views.py
-# En tu views.py
 class prestarLibros(View):
     template_name = "biblioteca/prestarLibros.html"
 
@@ -98,11 +96,14 @@ class prestarLibros(View):
         return render(request, self.template_name, {"form": form})
 
 #5. BOTON DEVOLVER LIBRO PRESTADO
+class devolverLibros(View):
+    def get(self, request, pk):
+        prestamo = get_object_or_404(Prestamo, pk=pk)
+        return render(request, 'biblioteca/devolverLibros.html', {'prestamo': prestamo})
 
-#def devolver_libro(request, pk):
-#    libro_prestado = get_object_or_404(Libro, pk= pk, disponibilidad= "prestado")
-#    prestamo = Prestamo.objects.filter(libro= libro_prestado, usuario= request.user, estado= "prestado").first()
-#
-#    if request.method == "POST":
-#        prestamo.estado = "devuelto"
-#        prestamo.
+    def post(self, request, pk):
+        prestamo = get_object_or_404(Prestamo, pk=pk)
+        prestamo.estado_prestamo = 'devuelto'
+        prestamo.save()
+
+        return redirect('misLibros')

@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Prestar</title>
+        <title>Prestar Libro</title>
         <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.classless.min.css">
     </head>
     <body style="padding: 20px;">
@@ -14,10 +14,15 @@
         <p></p> <!-- Espacio de linea -->
 
         <form action="" method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
+            <article>
+                <p>¿Estás seguro  de que quieres PRESTAR este libro?</p>
+                <p><b>PUEDES DEVOLVERLO MÁS TARDE.</b></p>
             
-            <input type="submit" value="Prestar">
+                {% csrf_token %}
+                {{ form.as_p }}
+            
+                <input type="submit" value="Confirmar Prestamo">
+            </article>
         </form>
 
     </body>

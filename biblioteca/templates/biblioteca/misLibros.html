@@ -18,19 +18,18 @@
         <p></p> <!-- Espacio de linea -->
         
         <h2>Libros Prestados</h2>
-
         <article>
             {% for prestamo in prestamos_prestados %}
                 <p> 
                     <b>Titulo:</b> {{ prestamo.libro_prestado.titulo }} 
                     <br>
                     <b>Fecha Préstamo:</b> {{ prestamo.fecha_prestamo }}
+                    <br><br>
+                    <a href="{% url 'devolverLibros' pk=prestamo.pk %}" role="button">Devolver</a>
                 </p>
-
             {% empty %}
                 <p>No tienes libros prestados.</p>
             {% endfor %}
-
         </article>
 
         <h2>Libros Devueltos</h2>
