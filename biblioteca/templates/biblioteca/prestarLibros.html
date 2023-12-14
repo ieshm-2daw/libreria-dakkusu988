@@ -1,3 +1,4 @@
+<!-- prestarLibros.html -->
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -6,17 +7,18 @@
         <title>Prestar</title>
         <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.classless.min.css">
     </head>
-
     <body style="padding: 20px;">
 
-        <form action= "{% url 'prestarLibros' pk=object.pk %}" method="post">
+        <h2>Prestar Libro</h2>
+        <a href="{% url 'listadoLibros' %}" role="button">Volver al Listado</a>
+        <p></p> <!-- Espacio de linea -->
 
+        <form action="" method="post">
             {% csrf_token %}
             {{ form.as_p }}
             
             <input type="submit" value="Prestar">
-            
         </form>
 
-    </body> 
+    </body>
 </html>

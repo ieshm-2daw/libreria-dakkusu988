@@ -23,9 +23,7 @@
             {% for prestamo in prestamos_prestados %}
                 <p> 
                     <b>Titulo:</b> {{ prestamo.libro_prestado.titulo }} 
-                    
-                    <br> 
-
+                    <br>
                     <b>Fecha Préstamo:</b> {{ prestamo.fecha_prestamo }}
                 </p>
 
@@ -40,10 +38,8 @@
         <article>
             {% for prestamo in prestamos_devueltos %}
                 <p> 
-                    <b>Titulo:</b> {{ prestamo.libro_prestado.titulo }} 
-                    
+                    <b>Titulo:</b> {{ prestamo.libro_prestado.titulo }}  
                     <br> 
-
                     <b>Fecha Devolución:</b> {{ prestamo.fecha_devolucion }}
                 </p>
 

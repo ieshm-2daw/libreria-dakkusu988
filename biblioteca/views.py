@@ -4,6 +4,7 @@ from django.views.generic import ListView, CreateView, DetailView, UpdateView, D
 from .models import Libro, Prestamo
 from django.urls import reverse, reverse_lazy
 from typing import Any
+from .forms import PrestamoForm
 
 # 1. LIBROS (CRUD)
 class listadoLibros(ListView):
@@ -67,28 +68,34 @@ class misLibros(ListView):
         return context
 
 #4. BOTON PRESTAR LIBRO
+# En tu views.py
+# En tu views.py
 class prestarLibros(View):
-    
     template_name = "biblioteca/prestarLibros.html"
 
     def get(self, request, pk):
         libro = get_object_or_404(Libro, pk=pk)
-        return render(request, "biblioteca/prestarLibros.html", {"libro": libro})
-    
+        form = PrestamoForm(initial={'libro_prestado': libro})
+        return render(request, self.template_name, {"form": form})
+
     def post(self, request, pk):
         libro = get_object_or_404(Libro, pk=pk)
-        libro.disponibilidad = "prestado"
-        libro.save()
-
-        Prestamo.objects.create(
-            libro = libro,
-            usuario = request.usuario,
-            fecha_prestamo = date.today()
-        )
-
-        return redirect("misLibros", pk=pk)
+        form = PrestamoForm(request.POST)
         
+        if form.is_valid():
+            prestamo = form.save(commit=False)
+            prestamo.libro_prestado = libro
+            prestamo.usuario_prestador = request.user
+            prestamo.fecha_prestamo = date.today()
+            prestamo.estado_prestamo = 'prestado'
+            prestamo.save()
 
+            libro.disponibilidad = 'prestado'
+            libro.save()
+
+            return redirect('misLibros')
+
+        return render(request, self.template_name, {"form": form})
 
 #5. BOTON DEVOLVER LIBRO PRESTADO
 
