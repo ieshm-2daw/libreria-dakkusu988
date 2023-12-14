@@ -9,7 +9,7 @@ class LibroForm(forms.ModelForm):
 class PrestamoForm(forms.ModelForm):
     class Meta:
         model = Prestamo
-        fields = ['fecha_prestamo']  # Agrega los campos que necesites en tu formulario
+        fields = ['fecha_prestamo']
 
     def __init__(self, *args, **kwargs):
         super(PrestamoForm, self).__init__(*args, **kwargs)
