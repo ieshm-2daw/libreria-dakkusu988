@@ -20,7 +20,7 @@
         <h2>Libros Prestados</h2>
 
         <article>
-            {% for prestamo in prestamos_prestados %}
+            {% for prestamo in object_list %}
                 <p>{{ prestamo.libro_prestado.titulo }} - {{ prestamo.fecha_prestamo }}</p>
             {% empty %}
                 <p>No tienes libros prestados.</p>

@@ -1,5 +1,6 @@
+from datetime import date
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView, View
 from .models import Libro, Prestamo
 from django.urls import reverse, reverse_lazy
 from typing import Any
@@ -60,12 +61,37 @@ class misLibros(ListView):
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
 
-        context["prestamos_prestados"] = Prestamo.objects.filter(usuario_prestador=self.request.user, estado_prestamo="prestado")
+        context["prestamos_prestados"] = Prestamo.objects.all() #filter(usuario_prestador=self.request.user, estado_prestamo="prestado")
         context["prestamos_devueltos"] = Prestamo.objects.filter(usuario_prestador=self.request.user, estado_prestamo="devuelto")
 
         return context
 
-#4. BOTON DEVOLVER LIBRO PRESTADO
+#4. BOTON PRESTAR LIBRO
+    
+class prestarLibros(View):
+    
+    template_name = "biblioteca/prestarLibros.html"
+
+    def get(self, request, pk):
+        libro = get_object_or_404(Libro, pk=pk)
+        return render(request, "biblioteca/prestarLibros.html", {"libro": libro})
+    
+    def post(self, request, pk):
+        libro = get_object_or_404(Libro, pk=pk)
+        libro.disponibilidad = "prestado"
+        libro.save()
+
+        Prestamo.objects.create(
+            libro = libro,
+            usuario = request.usuario,
+            fecha_prestamo = date.today()
+        )
+
+        return redirect("misLibros", pk=pk)
+        
+
+
+#5. BOTON DEVOLVER LIBRO PRESTADO
 
 #def devolver_libro(request, pk):
 #    libro_prestado = get_object_or_404(Libro, pk= pk, disponibilidad= "prestado")
