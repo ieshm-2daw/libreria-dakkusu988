@@ -24,7 +24,8 @@
                 <a href="{% url 'detallesLibros' pk=book.pk %}" role="button">Detalles</a>
                 <p></p> <!-- Espacio de linea -->
                 <p> <img style="height: 400px" src="{{ book.portada.url }}" alt="Portada de {{ book.titulo }}"> </p>
-                
+            {% empty %}
+                <li>No tienes libros disponibles.</li>
             </article>
         {% endfor %}
         
