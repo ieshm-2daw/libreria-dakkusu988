@@ -33,7 +33,11 @@
 
             <a href="{% url 'listadoLibros' %}" role="button">Volver al Listado</a>
             <a href="{% url 'editarLibros' pk=object.pk %}" role="button">Editar</a>
-            <a href="{% url 'prestarLibros' pk=object.pk %}" role="button">Prestar</a>
+
+            {% if object.disponibilidad == 'disponible' %}
+                <a href="{% url 'prestarLibros' pk=object.pk %}" role="button">Prestar</a>
+            {% endif %}
+
             <a href="{% url 'borrarLibros' pk=object.pk %}" role="button">Borrar</a>
         </article>
 
