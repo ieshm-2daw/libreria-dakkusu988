@@ -20,7 +20,7 @@
         <h2>Libros Prestados</h2>
         <article>
             {% for prestamo in prestamos_prestados %}
-                {% if prestamo.libro_prestado.disponibilidad == 'prestado' %}
+                {% if prestamo.estado_prestamo == 'prestado' %}
                     <p> 
                         <b>Titulo:</b> {{ prestamo.libro_prestado.titulo }}
                         <br>
@@ -37,7 +37,7 @@
         <h2>Libros Devueltos</h2>
         <article>
             {% for prestamo in prestamos_devueltos %}
-                {% if prestamo.libro_prestado.disponibilidad == 'disponible' %}
+                {% if prestamo.estado_prestamo == 'devuelto' %}
                     <p> 
                         <b>Titulo:</b> {{ prestamo.libro_prestado.titulo }}  
                         <br> 

@@ -69,11 +69,17 @@ class prestarLibros(View):
     template_name = "biblioteca/prestarLibros.html"
 
     def get(self, request, pk):
-        return render(request, self.template_name, {"error_message": "No se puede acceder directamente a esta página."})
+        # Manejar solicitudes GET para mostrar un mensaje de error
+        return render(request, self.template_name, {"error_message": "No se puede acceder a esta página."})
 
     def post(self, request, pk):
         libro = get_object_or_404(Libro, pk=pk)
+
+        # Verificar si el libro ya está prestado
+        if Prestamo.objects.filter(libro_prestado=libro, estado_prestamo='prestado').exists():
+            return redirect('misLibros')
         
+        # Crear un nuevo registro de préstamo con la fecha actual por defecto
         Prestamo.objects.create(
             libro_prestado=libro,
             usuario_prestador=request.user,
