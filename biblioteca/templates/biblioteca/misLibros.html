@@ -12,7 +12,7 @@
         <h1>Mis Libros</h1>
 
         <a role="button" href="{% url 'anadirLibros' %}"> Añadir un Libro Nuevo </a>
-        <a href="{% url 'listadoLibros' %}" role="button">Todos los libros</a>
+        <a href="{% url 'listadoLibros' %}" role="button">Todos los Libros</a>
         <a href="{% url 'listadoDisponibles' %}" role="button">Libros Disponibles</a>
         <a href="{% url 'misLibros' %}" role="button">Mis Libros</a>
         <p></p> <!-- Espacio de linea -->
@@ -41,7 +41,6 @@
                     <br> 
                     <b>Fecha Devolución:</b> {{ prestamo.fecha_devolucion }}
                 </p>
-
             {% empty %}
                 <p>No tienes historial de libros devueltos.</p>
             {% endfor %}
