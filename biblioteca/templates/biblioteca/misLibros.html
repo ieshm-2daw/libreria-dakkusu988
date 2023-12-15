@@ -20,27 +20,30 @@
         <h2>Libros Prestados</h2>
         <article>
             {% for prestamo in prestamos_prestados %}
-                <p> 
-                    <b>Titulo:</b> {{ prestamo.libro_prestado.titulo }}
-                    <br>
-                    <b>Fecha Préstamo:</b> {{ prestamo.fecha_prestamo }}
-                    <br><br>
-                    <a href="{% url 'devolverLibros' pk=prestamo.pk %}" role="button">Devolver</a>
-                </p>
+                {% if prestamo.libro_prestado.disponibilidad == 'prestado' %}
+                    <p> 
+                        <b>Titulo:</b> {{ prestamo.libro_prestado.titulo }}
+                        <br>
+                        <b>Fecha Préstamo:</b> {{ prestamo.fecha_prestamo }}
+                        <br><br>
+                        <a href="{% url 'devolverLibros' pk=prestamo.pk %}" role="button">Devolver</a>
+                    </p>
+                {% endif %}
             {% empty %}
                 <p>No tienes libros prestados.</p>
             {% endfor %}
         </article>
 
         <h2>Libros Devueltos</h2>
-        
         <article>
             {% for prestamo in prestamos_devueltos %}
-                <p> 
-                    <b>Titulo:</b> {{ prestamo.libro_prestado.titulo }}  
-                    <br> 
-                    <b>Fecha Devolución:</b> {{ prestamo.fecha_devolucion }}
-                </p>
+                {% if prestamo.libro_prestado.disponibilidad == 'disponible' %}
+                    <p> 
+                        <b>Titulo:</b> {{ prestamo.libro_prestado.titulo }}  
+                        <br> 
+                        <b>Fecha Devolución:</b> {{ prestamo.fecha_devolucion }}
+                    </p>
+                {% endif %}
             {% empty %}
                 <p>No tienes historial de libros devueltos.</p>
             {% endfor %}

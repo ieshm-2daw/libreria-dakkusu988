@@ -4,7 +4,6 @@ from django.views.generic import ListView, CreateView, DetailView, UpdateView, D
 from .models import Libro, Prestamo
 from django.urls import reverse, reverse_lazy
 from typing import Any
-from .forms import PrestamoForm
 
 # 1. LIBROS (CRUD)
 class listadoLibros(ListView):
@@ -71,29 +70,20 @@ class misLibros(ListView):
 class prestarLibros(View):
     template_name = "biblioteca/prestarLibros.html"
 
-    def get(self, request, pk):
-        libro = get_object_or_404(Libro, pk=pk)
-        form = PrestamoForm(initial={'libro_prestado': libro})
-        return render(request, self.template_name, {"form": form})
-
     def post(self, request, pk):
         libro = get_object_or_404(Libro, pk=pk)
-        form = PrestamoForm(request.POST)
         
-        if form.is_valid():
-            prestamo = form.save(commit=False)
-            prestamo.libro_prestado = libro
-            prestamo.usuario_prestador = request.user
-            prestamo.fecha_prestamo = date.today()
-            prestamo.estado_prestamo = 'prestado'
-            prestamo.save()
+        Prestamo.objects.create(
+            libro_prestado=libro,
+            usuario_prestador=request.user,
+            fecha_prestamo=date.today(),
+            estado_prestamo='prestado'
+        )
 
-            libro.disponibilidad = 'prestado'
-            libro.save()
+        libro.disponibilidad = 'prestado'
+        libro.save()
 
-            return redirect('misLibros')
-
-        return render(request, self.template_name, {"form": form})
+        return redirect('misLibros')
 
 #5. BOTON DEVOLVER LIBRO PRESTADO
 class devolverLibros(View):
@@ -103,7 +93,16 @@ class devolverLibros(View):
 
     def post(self, request, pk):
         prestamo = get_object_or_404(Prestamo, pk=pk)
-        prestamo.estado_prestamo = 'devuelto'
-        prestamo.save()
+        
+        if prestamo.libro_prestado.disponibilidad == 'prestado':
+            prestamo.estado_prestamo = 'devuelto'
+            prestamo.fecha_devolucion = date.today()
+            prestamo.save()
+
+            libro_prestado = prestamo.libro_prestado
+            libro_prestado.disponibilidad = 'disponible'
+            libro_prestado.save()
+
+            return redirect('misLibros')
 
         return redirect('misLibros')
