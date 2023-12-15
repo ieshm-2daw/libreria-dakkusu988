@@ -1,9 +1,9 @@
-from datetime import date
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView, View
 from .models import Libro, Prestamo
 from django.urls import reverse, reverse_lazy
 from typing import Any
+from datetime import date
 
 # 1. LIBROS (CRUD)
 class listadoLibros(ListView):
@@ -42,7 +42,6 @@ class borrarLibros(DeleteView):
         return "El libro ha sido eliminado exitosamente"
     
 #2. DISPONIBLES
-
 class listadoDisponibles(ListView):
     model = Libro
     template_name = 'biblioteca/listadoDisponibles.html'
@@ -53,7 +52,6 @@ class listadoDisponibles(ListView):
 
 
 #3. MIS LIBROS (PRESTADOS Y DEVUELTOS [HISTORIAL])
-
 class misLibros(ListView):
     model = Prestamo
     template_name = 'biblioteca/misLibros.html'
@@ -69,6 +67,9 @@ class misLibros(ListView):
 #4. BOTON PRESTAR LIBRO
 class prestarLibros(View):
     template_name = "biblioteca/prestarLibros.html"
+
+    def get(self, request, pk):
+        return render(request, self.template_name, {"error_message": "No se puede acceder directamente a esta página."})
 
     def post(self, request, pk):
         libro = get_object_or_404(Libro, pk=pk)
