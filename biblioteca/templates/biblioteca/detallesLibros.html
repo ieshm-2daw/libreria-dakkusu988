@@ -10,6 +10,11 @@
     <body style="padding: 20px;">
 
         <h2>Detalles del Libro</h2>
+
+        <a href="{% url 'listadoLibros' %}" role="button">Volver al Listado Completo</a>
+        <a href="{% url 'listadoDisponibles' %}" role="button">Volver a Disponibles</a>
+        <a href="{% url 'misLibros' %}" role="button">Volver a Mis Libros</a>
+        <a href="{% url 'listadoAlfabeticos' %}" role="button">Volver a Libros A-Z</a>
         
         <article>
             <p><strong>Titulo:</strong> {{ object.titulo }}</p>
@@ -31,7 +36,6 @@
                 <img style="height: 400px" src="{{ object.portada.url }}" alt="Portada de {{ object.titulo }}">
             </p>
 
-            <a href="{% url 'listadoLibros' %}" role="button">Volver al Listado</a>
             <a href="{% url 'editarLibros' pk=object.pk %}" role="button">Editar</a>
 
             {% if object.disponibilidad == 'disponible' %}

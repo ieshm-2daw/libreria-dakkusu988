@@ -11,10 +11,11 @@
 
         <h1>Mis Libros</h1>
 
-        <a role="button" href="{% url 'anadirLibros' %}"> Añadir un Libro Nuevo </a>
+        <a role="button" href="{% url 'anadirLibros' %}" style="background-color: green;"> Añadir un Libro Nuevo </a>
         <a href="{% url 'listadoLibros' %}" role="button">Todos los Libros</a>
         <a href="{% url 'listadoDisponibles' %}" role="button">Libros Disponibles</a>
-        <a href="{% url 'misLibros' %}" role="button">Mis Libros</a>
+        <a href="{% url 'misLibros' %}" role="button" style="background-color: red;">Mis Libros</a>
+        <a href="{% url 'listadoAlfabeticos' %}" role="button">Libros A-Z</a>
         <p></p> <!-- Espacio de linea -->
         
         <h2>Libros Prestados</h2>

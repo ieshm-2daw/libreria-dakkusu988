@@ -9,8 +9,11 @@
     <body style="padding: 20px;">
 
         <h2>Prestar Libro</h2>
-        <a href="{% url 'listadoLibros' %}" role="button">Volver al Listado</a>
-        <p></p> <!-- Espacio de linea -->
+        
+        <a href="{% url 'listadoLibros' %}" role="button">Volver al Listado Completo</a>
+        <a href="{% url 'listadoDisponibles' %}" role="button">Volver a Disponibles</a>
+        <a href="{% url 'misLibros' %}" role="button">Volver a Mis Libros</a>
+        <a href="{% url 'listadoAlfabeticos' %}" role="button">Volver a Libros A-Z</a>
 
         <form action="" method="post">
             <article>

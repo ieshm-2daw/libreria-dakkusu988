@@ -11,8 +11,10 @@
 
         <h1>Añadir un Libro Nuevo</h1>
 
-        <a href="{% url 'listadoLibros' %}" role="button">Volver al Listado</a>
-        <p></p> <!-- Espacio de linea -->
+        <a href="{% url 'listadoLibros' %}" role="button">Volver al Listado Completo</a>
+        <a href="{% url 'listadoDisponibles' %}" role="button">Volver a Disponibles</a>
+        <a href="{% url 'misLibros' %}" role="button">Volver a Mis Libros</a>
+        <a href="{% url 'listadoAlfabeticos' %}" role="button">Volver a Libros A-Z</a>
         
         <!-- enctype="multipart/form-data" Hace que se guarden los datos de la imagen -->
         <form action= "{% url 'anadirLibros' %}" enctype="multipart/form-data" method="post">

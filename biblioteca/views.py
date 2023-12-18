@@ -113,3 +113,11 @@ class devolverLibros(View):
             return redirect('misLibros')
 
         return redirect('misLibros')
+    
+#6. LISTA ALFABETICA POR TITULO
+class listadoAlfabeticos(ListView):
+    model = Libro
+    template_name = 'biblioteca/listadoAlfabeticos.html'
+
+    def get_queryset(self):
+        return Libro.objects.order_by('titulo')
