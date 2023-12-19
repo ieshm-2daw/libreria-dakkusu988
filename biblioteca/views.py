@@ -9,6 +9,7 @@ from datetime import date
 class listadoLibros(ListView):
     model = Libro
     template_name = 'biblioteca/listadoLibros.html'
+    paginate_by = 2
 
 class anadirLibros(CreateView):
     model = Libro
