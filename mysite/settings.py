@@ -64,10 +64,23 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+""" BASE DE DATOS MIA
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+"""
+# BASE DE DATOS DEL SERVIDOR DE JOSE IG.
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "libreria_David988",
+        "USER": "David988",
+        "PASSWORD": "alumnado",
+        "HOST": "192.168.100.5",
+        "PORT": 3306,
     }
 }
 
