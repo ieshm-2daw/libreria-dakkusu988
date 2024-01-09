@@ -18,25 +18,25 @@
         <a href="{% url 'listadoAlfabeticos' %}" role="button" style="background-color: red;">Libros A-Z</a>
         <p></p> <!-- Espacio de linea -->
 
-        <!-- Filtro por título o autor -->
+        <!-- Orden por título o autor -->
         <article>
             <form action="" method="get">
-                <label for="filtro">Filtrar por:</label>
+                <label for="filtro">Ordenar por:</label>
 
                 <select id="filtro" name="filtro">
-                    <option value="" selected disabled>Seleccione un filtro...</option>
+                    <option value="" selected disabled>Seleccione un valor...</option>
                     <option value="titulo">Titulo</option>
                     <option value="autor">Autor</option>
                 </select>
 
-                <input type="submit" value="Filtrar">
+                <input type="submit" value="Ordenar">
             </form>
 
             <!-- Texto que indica el filtro actual -->
             {% if request.GET.filtro %}
                 <p> 
                     <strong> 
-                        Se está filtrando por: <u>{{ request.GET.filtro|capfirst }}</u> 
+                        Se está ordenando por: <u>{{ request.GET.filtro|capfirst }}</u> 
                     </strong> 
                 </p>
             {% endif %}

@@ -115,7 +115,7 @@ class devolverLibros(View):
 
         return redirect('misLibros')
     
-#6. LISTA ALFABETICA POR TITULO
+#6. LISTA ALFABETICA POR TITULO y AUTOR
 class listadoAlfabeticos(ListView):
     model = Libro
     template_name = 'biblioteca/listadoAlfabeticos.html'
