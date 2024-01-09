@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView, View
-from .models import Libro, Prestamo
+from .models import Libro, Prestamo, Autor
 from django.urls import reverse, reverse_lazy
 from typing import Any
 from datetime import date
@@ -121,4 +121,15 @@ class listadoAlfabeticos(ListView):
     template_name = 'biblioteca/listadoAlfabeticos.html'
 
     def get_queryset(self):
-        return Libro.objects.order_by('titulo')
+        filtro = self.request.GET.get('filtro')  # Obtener el valor del filtro
+
+        if filtro == 'autor':
+            return Libro.objects.order_by('autores__nombre')  # Ordenar por nombre de autor
+        
+        else:
+            return Libro.objects.order_by('titulo')  # Ordenar por título de libro
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['autores'] = Autor.objects.all()  # Pasar todos los autores al contexto
+        return context

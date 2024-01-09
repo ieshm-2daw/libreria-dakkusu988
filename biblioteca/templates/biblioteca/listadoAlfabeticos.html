@@ -18,15 +18,52 @@
         <a href="{% url 'listadoAlfabeticos' %}" role="button" style="background-color: red;">Libros A-Z</a>
         <p></p> <!-- Espacio de linea -->
 
+        <!-- Filtro por título o autor -->
+        <article>
+            <form action="" method="get">
+                <label for="filtro">Filtrar por:</label>
+
+                <select id="filtro" name="filtro">
+                    <option value="" selected disabled>Seleccione un filtro...</option>
+                    <option value="titulo">Titulo</option>
+                    <option value="autor">Autor</option>
+                </select>
+
+                <input type="submit" value="Filtrar">
+            </form>
+
+            <!-- Texto que indica el filtro actual -->
+            {% if request.GET.filtro %}
+                <p> 
+                    <strong> 
+                        Se está filtrando por: <u>{{ request.GET.filtro|capfirst }}</u> 
+                    </strong> 
+                </p>
+            {% endif %}
+        </article>
+
+        <!-- Listado de libros -->
         {% for book in object_list %}
             <article>
+                <h3><u>Titulo:</u> {{ book.titulo }}</h3>
 
-                <h3> {{ book.titulo }} </h3>
-                <a href="{% url 'detallesLibros' pk=book.pk %}" role="button">Detalles</a>
-                <p></p> <!-- Espacio de linea -->
-                <p> <img style="height: 200px" src="{{ book.portada.url }}" alt="Portada de {{ book.titulo }}"> </p>
+                <h5> <u>Autor:</u>
+                    {% for author in book.autores.all %}
+                        {{ author.nombre }}{% if not forloop.last %}, {% endif %} <!-- Para mostrar correctamente el nombre del autor correspondiente --->
+                    {% endfor %}
+                </h5>
 
+                <p>
+                    <a href="{% url 'detallesLibros' pk=book.pk %}" role="button">Detalles</a>
+                </p>
+
+                <p>
+                    <img style="height: 200px" src="{{ book.portada.url }}" alt="Portada de {{ book.titulo }}">
+                </p>
             </article>
+
+        {% empty %}
+            <p>No hay libros disponibles.</p>
         {% endfor %}
 
     </body>
