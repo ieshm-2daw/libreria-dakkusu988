@@ -20,15 +20,13 @@
 
         <!-- Orden por título o autor -->
         <article>
-            <form action="" method="get">
+            <form action="{% url 'listadoAlfabeticos' %}" method="get">
                 <label for="filtro">Ordenar por:</label>
-
                 <select id="filtro" name="filtro">
                     <option value="" selected disabled>Seleccione un valor...</option>
                     <option value="titulo">Titulo</option>
                     <option value="autor">Autor</option>
                 </select>
-
                 <input type="submit" value="Ordenar">
             </form>
 
@@ -44,35 +42,40 @@
 
         <!-- Barra de búsqueda -->
         <article>
-            <form action="{% url 'buscarLibros' %}" method="GET">
+            <form action="{% url 'listadoAlfabeticos' %}" method="GET">
                 <label for="q">Buscar libros:</label>
-                <input type="text" id="q" name="q">
+                <input type="text" id="q" name="q" placeholder="Escribe un nombre o autor a encontrar...">
                 <input type="submit" value="Buscar">
             </form>
-        </article>
 
+            <!-- Texto que indica la búsqueda actual -->
+            {% if request.GET.q %}
+                <p> 
+                    <strong> 
+                        Se esta buscando por: <u>{{ request.GET.q }}</u> 
+                    </strong> 
+                </p>
+            {% endif %}
+        </article>
+        
         <!-- Listado de libros -->
         {% for book in object_list %}
-            <article>
-                <h3><u>Titulo:</u> {{ book.titulo }}</h3>
+        <article>
+            <h3><u>Titulo:</u> {{ book.titulo }}</h3>
 
-                <h5> <u>Autor:</u>
-                    {% for author in book.autores.all %}
-                        {{ author.nombre }}{% if not forloop.last %}, {% endif %} <!-- Para mostrar correctamente el nombre del autor correspondiente --->
-                    {% endfor %}
-                </h5>
+            <h5> <u>Autor:</u> 
+                {% for author in book.autores.all %}
+                    {{ author.nombre }}{% if not forloop.last %}, {% endif %} <!-- Para mostrar correctamente el nombre del autor correspondiente --->
+                {% endfor %}
+            </h5>
+            <p> <a href="{% url 'detallesLibros' pk=book.pk %}" role="button">Detalles</a> </p>
+            <p> <img style="height: 200px" src="{{ book.portada.url }}" alt="Portada de {{ book.titulo }}"> </p>
 
-                <p>
-                    <a href="{% url 'detallesLibros' pk=book.pk %}" role="button">Detalles</a>
-                </p>
-
-                <p>
-                    <img style="height: 200px" src="{{ book.portada.url }}" alt="Portada de {{ book.titulo }}">
-                </p>
-            </article>
-
+        </article>
         {% empty %}
-            <p>No hay libros disponibles.</p>
+        <article>
+            <h1>No se ha encontrado ese Libro o Autor.</h1>
+        </article>
         {% endfor %}
 
     </body>

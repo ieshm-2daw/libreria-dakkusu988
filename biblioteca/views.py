@@ -5,6 +5,7 @@ from django.urls import reverse, reverse_lazy
 from typing import Any
 from datetime import date
 from django.db.models import Q
+#from django.contrib
 
 # 1. LIBROS (CRUD)
 class listadoLibros(ListView):
@@ -116,34 +117,31 @@ class devolverLibros(View):
 
         return redirect('misLibros')
     
-#6. LISTA ALFABETICA POR TITULO y AUTOR
+#6. ORDEN POR TITULO y AUTOR - BARRA DE BUSQUEDA POR TITULO
 class listadoAlfabeticos(ListView):
     model = Libro
     template_name = 'biblioteca/listadoAlfabeticos.html'
 
     def get_queryset(self):
-        filtro = self.request.GET.get('filtro')  # Obtener el valor del filtro
+        query = self.request.GET.get('q')
+        filtro = self.request.GET.get('filtro')
 
-        if filtro == 'autor':
-            return Libro.objects.order_by('autores__nombre')  # Ordenar por nombre de autor
-        
+        # Si hay una búsqueda por palabra
+        if query:
+            object_list = Libro.objects.filter(
+                Q(titulo__icontains=query) |
+                Q(autores__nombre__icontains=query)
+            )
         else:
-            return Libro.objects.order_by('titulo')  # Ordenar por título de libro
+            # Si hay un filtro de ordenamiento
+            if filtro == 'autor':
+                object_list = Libro.objects.order_by('autores__nombre')
+            else:
+                object_list = Libro.objects.order_by('titulo')
+
+        return object_list
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['autores'] = Autor.objects.all()  # Pasar todos los autores al contexto
         return context
-
-#7. BUSQUEDA DE LIBROS POR TITULO
-class BuscarLibros(ListView):
-    model = Libro
-    template_name = 'biblioteca/buscarLibros.html'
-
-    def get_queryset(self):
-        query = self.request.GET.get('q')
-        object_list = Libro.objects.filter(
-            Q(titulo__icontains=query) |
-            Q(autores__nombre__icontains=query)
-        )
-        return object_list
