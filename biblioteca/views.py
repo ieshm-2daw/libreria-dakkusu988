@@ -4,6 +4,7 @@ from .models import Libro, Prestamo, Autor
 from django.urls import reverse, reverse_lazy
 from typing import Any
 from datetime import date
+from django.db.models import Q
 
 # 1. LIBROS (CRUD)
 class listadoLibros(ListView):
@@ -133,3 +134,16 @@ class listadoAlfabeticos(ListView):
         context = super().get_context_data(**kwargs)
         context['autores'] = Autor.objects.all()  # Pasar todos los autores al contexto
         return context
+
+#7. BUSQUEDA DE LIBROS POR TITULO
+class BuscarLibros(ListView):
+    model = Libro
+    template_name = 'biblioteca/buscarLibros.html'
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        object_list = Libro.objects.filter(
+            Q(titulo__icontains=query) |
+            Q(autores__nombre__icontains=query)
+        )
+        return object_list

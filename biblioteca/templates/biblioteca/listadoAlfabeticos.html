@@ -42,6 +42,15 @@
             {% endif %}
         </article>
 
+        <!-- Barra de búsqueda -->
+        <article>
+            <form action="{% url 'buscarLibros' %}" method="GET">
+                <label for="q">Buscar libros:</label>
+                <input type="text" id="q" name="q">
+                <input type="submit" value="Buscar">
+            </form>
+        </article>
+
         <!-- Listado de libros -->
         {% for book in object_list %}
             <article>
