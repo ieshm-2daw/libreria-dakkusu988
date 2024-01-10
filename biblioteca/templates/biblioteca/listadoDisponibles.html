@@ -9,8 +9,7 @@
 
     <body style="padding: 20px;">
 
-        <h1>Libros Disponibles</h1>
-
+        <h1>Libros Disponibles para Prestar</h1>
 
         {% if request.user.is_authenticated %}
             <strong> ¡Hola <u>{{ request.user.first_name|default:request.user.username }}</u>! ¡Bienvenido! </strong>
@@ -20,7 +19,6 @@
         
         <p></p> <!-- Espacio de linea -->
 
-        
         <a role="button" href="{% url 'anadirLibros' %}" style="background-color: green;"> Añadir un Libro Nuevo </a>
         <a href="{% url 'listadoLibros' %}" role="button">Todos los Libros</a>
         <a href="{% url 'listadoDisponibles' %}" role="button" style="background-color: red;">Libros Disponibles</a>
