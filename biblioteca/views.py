@@ -5,10 +5,10 @@ from django.urls import reverse, reverse_lazy
 from typing import Any
 from datetime import date
 from django.db.models import Q
-#from django.contrib
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # 1. LIBROS (CRUD)
-class listadoLibros(ListView):
+class listadoLibros(LoginRequiredMixin, ListView):
     model = Libro
     template_name = 'biblioteca/listadoLibros.html'
     paginate_by = 2

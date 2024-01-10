@@ -11,11 +11,21 @@
 
         <h1>Libros Disponibles</h1>
 
+
+        {% if request.user.is_authenticated %}
+            <strong> ¡Hola <u>{{ request.user.first_name|default:request.user.username }}</u>! ¡Bienvenido! </strong>
+            <p></p> <!-- Espacio de linea -->
+            <a role="button" href="{% url 'logout' %}" style="background-color: maroon;">Cerrar Sesión</a>
+        {% endif %}
+        
+        <p></p> <!-- Espacio de linea -->
+
+        
         <a role="button" href="{% url 'anadirLibros' %}" style="background-color: green;"> Añadir un Libro Nuevo </a>
         <a href="{% url 'listadoLibros' %}" role="button">Todos los Libros</a>
         <a href="{% url 'listadoDisponibles' %}" role="button" style="background-color: red;">Libros Disponibles</a>
         <a href="{% url 'misLibros' %}" role="button">Mis Libros</a>
-        <a href="{% url 'listadoAlfabeticos' %}" role="button">Libros A-Z</a>
+        <a href="{% url 'listadoAlfabeticos' %}" role="button">Busqueda Libros</a>
         <p></p> <!-- Espacio de linea -->
         
         {% for book in object_list %}
