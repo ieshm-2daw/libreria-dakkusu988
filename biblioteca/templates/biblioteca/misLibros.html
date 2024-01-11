@@ -35,7 +35,7 @@
                         <br>
                         <b>Fecha Préstamo:</b> {{ prestamo.fecha_prestamo }}
                         <br><br>
-                        <a href="{% url 'devolverLibros' pk=prestamo.pk %}" role="button">Devolver</a>
+                        <a href="{% url 'devolverLibros' pk=prestamo.pk %}" role="button" style="background-color: rgb(140, 0, 255);">Devolver</a>
                     </p>
                 {% endif %}
             {% empty %}

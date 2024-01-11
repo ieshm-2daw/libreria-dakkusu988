@@ -11,10 +11,10 @@
 
         <h2>Detalles del Libro</h2>
 
-        <a href="{% url 'listadoLibros' %}" role="button">Volver al Listado Completo</a>
-        <a href="{% url 'listadoDisponibles' %}" role="button">Volver a Disponibles</a>
-        <a href="{% url 'misLibros' %}" role="button">Volver a Mis Libros</a>
-        <a href="{% url 'listadoAlfabeticos' %}" role="button">Volver a Libros A-Z</a>
+        <a href="{% url 'listadoLibros' %}" role="button">Volver a <u>Todos los Libros</u> </a>
+        <a href="{% url 'listadoDisponibles' %}" role="button">Volver a <u>Libros Disponibles</u> </a>
+        <a href="{% url 'misLibros' %}" role="button">Volver a <u>Mis Libros</u> </a>
+        <a href="{% url 'listadoAlfabeticos' %}" role="button">Volver a <u>Busqueda Libros</u> </a>
         
         <article>
             <p><strong>Titulo:</strong> {{ object.titulo }}</p>
@@ -36,13 +36,13 @@
                 <img style="height: 400px" src="{{ object.portada.url }}" alt="Portada de {{ object.titulo }}">
             </p>
 
-            <a href="{% url 'editarLibros' pk=object.pk %}" role="button">Editar</a>
+            <a href="{% url 'editarLibros' pk=object.pk %}" role="button" style="background-color: rgb(224, 198, 0);">Editar</a>
 
             {% if object.disponibilidad == 'disponible' %}
-                <a href="{% url 'prestarLibros' pk=object.pk %}" role="button">Prestar</a>
+                <a href="{% url 'prestarLibros' pk=object.pk %}" role="button" style="background-color: rgb(255, 157, 0);">Prestar</a>
             {% endif %}
 
-            <a href="{% url 'borrarLibros' pk=object.pk %}" role="button">Borrar</a>
+            <a href="{% url 'borrarLibros' pk=object.pk %}" role="button" style="background-color: rgb(179, 1, 1);">Borrar</a>
         </article>
 
     </body> 

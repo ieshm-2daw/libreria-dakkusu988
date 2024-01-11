@@ -10,20 +10,20 @@
 
         <h2>Prestar Libro</h2>
         
-        <a href="{% url 'listadoLibros' %}" role="button">Volver al Listado Completo</a>
-        <a href="{% url 'listadoDisponibles' %}" role="button">Volver a Disponibles</a>
-        <a href="{% url 'misLibros' %}" role="button">Volver a Mis Libros</a>
-        <a href="{% url 'listadoAlfabeticos' %}" role="button">Volver a Libros A-Z</a>
+        <a href="{% url 'listadoLibros' %}" role="button">Volver a <u>Todos los Libros</u> </a>
+        <a href="{% url 'listadoDisponibles' %}" role="button">Volver a <u>Libros Disponibles</u> </a>
+        <a href="{% url 'misLibros' %}" role="button">Volver a <u>Mis Libros</u> </a>
+        <a href="{% url 'listadoAlfabeticos' %}" role="button">Volver a <u>Busqueda Libros</u> </a>
 
         <form action="" method="post">
             <article>
-                <p>¿Estás seguro  de que quieres PRESTAR este libro?</p>
+                <p>¿Estás seguro de que quieres <b>PRESTAR</b> este libro?</p>
                 <p><b>PUEDES DEVOLVERLO MÁS TARDE.</b></p>
             
                 {% csrf_token %}
                 {{ form.as_p }}
             
-                <input type="submit" value="Confirmar Prestamo">
+                <input type="submit" value="Confirmar Prestamo" style="background-color: rgb(255, 157, 0);">
             </article>
         </form>
 
