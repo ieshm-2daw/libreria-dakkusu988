@@ -10,10 +10,11 @@
     <body style="padding: 20px;">
 
         {% block content %}
+        <article>
             <h2>Sesión Cerrada</h2>
-
             <p>Puedes <a href="{% url 'login' %}">Iniciar Sesión</a> de nuevo</p>
-            <a role="button" href="{% url 'login' %}">Iniciar Sesión</a>
+            <a role="button" href="{% url 'login' %}" style="background-color: rgb(0, 209, 0);">Iniciar Sesión</a>
+        </article>
 
         {% endblock %}
         

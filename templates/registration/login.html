@@ -10,14 +10,15 @@
     <body style="padding: 20px;">
 
         {% block content %}
+        <article>
             <h2>Iniciar Sesión</h2>
-
-            <form action="{% url 'login' %}" method="post">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <input type="hidden" name="next" value="{{ next }}">
-                <p> <input type="submit" value="Iniciar Sesión"> </p>
-            </form>
+                <form action="{% url 'login' %}" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="hidden" name="next" value="{{ next }}">
+                    <p> <input type="submit" value="Iniciar Sesión" style="background-color: rgb(0, 209, 0);"> </p>
+                </form>
+        </article>
         {% endblock %}
         
     </body>
