@@ -22,7 +22,7 @@
 
         <form action="{% url 'devolverLibros' pk=prestamo.pk %}" method="post">
             {% csrf_token %}
-            <input type="submit" value="Confirmar Devolución">
+            <input type="submit" value="Confirmar Devolución" style="background-color: rgb(140, 0, 255);">
         </form>
     </body>
 </html>
